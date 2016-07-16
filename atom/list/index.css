@@ -1,0 +1,15 @@
+.list {
+
+}
+
+.list-item {
+
+}
+
+.list--ordered { 
+	list-style: disc inside;
+}
+
+.list--unordered { 
+	list-style: decimal inside;
+}

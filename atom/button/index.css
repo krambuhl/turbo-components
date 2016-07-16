@@ -1,0 +1,13 @@
+.button {
+	display: inline-block;
+	padding: 10px;
+
+	background: teal;
+	color: black
+	border: 1px solid black;
+	border-radius: 100%;
+}
+
+.button--cta {
+	background-color: red;
+}

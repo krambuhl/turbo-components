@@ -1,0 +1,7 @@
+{
+  "name": "turbo-components",
+  "description": "This is a testing repo for pulling versioned components using git and version tags.",
+  "scripts": { },
+  "author": "",
+  "license": "MIT"
+}
