@@ -1,4 +1,4 @@
-<div class="productlist">
+<div class="{{joinClass "productlist" attribs.addClass}}">
 	{{#each products as |product|}}
 		{{component "molecule/product" product}}
 	{{/each}}
