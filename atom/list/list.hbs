@@ -1,13 +1,13 @@
 {{#if (eq attribs.type "ordered")}}
-	<ol class="{{joinClass 'list list--ordered' attribs.addClass}}">
+	<ol {{classAttrib "list list--ordered" attribs.addClass}}>
 		{{children}}
 	</ol>
-{{else if (eq attribs.type "unordered") }}
-	<ul class="{{joinClass 'list list--unordered' attribs.addClass}}">
+{{else if (eq attribs.type "unordered")}}
+	<ul {{classAttrib "list list--unordered" attribs.addClass}}>
 		{{children}}
 	</ul>
 {{else}}
-	<ul class="{{joinClass 'list' attribs.addClass}}">
+	<ul {{classAttrib "list" attribs.addClass}}>
 		{{children}}
 	</ul>
 {{/if}}

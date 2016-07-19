@@ -1,5 +1,6 @@
-const Handlebars = require('handlebars');
+const helper = Handlebars => (a, b) => a === b;
 
-Handlebars.registerHelper('eq', function(a, b) {
-  return a === b;
-});
+module.exports = {
+  register: Handlebars => Handlebars.registerHelper('eq', helper(Handlebars)),
+  helper: helper
+};

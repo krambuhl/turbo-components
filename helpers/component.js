@@ -1,27 +1,36 @@
-const Handlebars = require('handlebars');
+const helper = Handlebars => {
+  const getTemplate = name => {
+    const template = Handlebars.partials[name];
 
-Handlebars.registerHelper('component', function(name, locals, opts) {
-  if (arguments.length === 2) {
-    opts = locals;
-    locals = {};
-  }
+    if (template === null) {
+      throw new Error('Missing partial: \'' + name + '\'');
+    }
 
+    if (typeof template !== 'function') {
+      return Handlebars.compile(template);
+    }
 
-  let data = Handlebars.createFrame(opts.data);
-  let context = Handlebars.Utils.extend({}, this, locals, {
-    attribs: opts.hash,
-    children: opts.fn(this)
-  });
+    return template;
+  };
 
-  let template = Handlebars.partials[name];
+  return (name, locals, opts) => {
+    if (arguments.length === 2) {
+      opts = locals;
+      locals = {};
+    }
 
-  if (template === null) {
-    throw new Error('Missing partial: \'' + name + '\'');
-  }
+    const template = getTemplateFn(name);
+    const data = Handlebars.createFrame(opts.data);
+    const cdata = Handlebars.Utils.extend({ }, this, locals, { attribs: opts.hash });
+    const context = Handlebars.Utils.extend({ }, cdata, {
+      children: opts.fn(cdata, { data: data })
+    });
 
-  if (typeof template !== 'function') {
-    template = Handlebars.compile(template);
-  }
+    return template(context, { data: data });
+  };
+};
 
-  return template(context, { data: data });
-});
+module.exports = {
+  register: Handlebars => Handlebars.registerHelper('component', helper(Handlebars)),
+  helper: helper
+};
