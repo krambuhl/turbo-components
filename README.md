@@ -6,6 +6,7 @@ This is a testing repo for pulling versioned components using git and version ta
 
 ## Atoms 
 
+- heading
 - button
 - card
 - list
@@ -13,9 +14,8 @@ This is a testing repo for pulling versioned components using git and version ta
 
 ## Molecules
 
-- card
+- product
 
 ## Organisms
 
-- cardlist
-- cardgrid
+- productlist
