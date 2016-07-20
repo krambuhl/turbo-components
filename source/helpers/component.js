@@ -1,3 +1,16 @@
+// # `component` helper
+//
+// helper for using partials that follow component-fn structure.
+//
+// effectively merges the {{>}}, {{#}}, {{#>}} helpers
+// with a slightly different data structure
+//
+// ```
+// {{component attr=value}}
+// {{component data attr=value}}
+// {{#component data attr=value}}Why Hello{{/component}}
+// ```
+
 const helper = Handlebars => {
   const getTemplate = name => {
     const template = Handlebars.partials[name];
