@@ -1,7 +1,18 @@
 {
   "name": "turbo-components",
-  "description": "This is a testing repo for pulling versioned components using git and version tags.",
-  "scripts": { },
-  "author": "",
-  "license": "MIT"
+  "description": "This is a repo for pulling versioned components using git",
+  "scripts": {
+    "build": "gulp build",
+    "precommit": "npm run build"
+  },
+  "author": "Evan Krambuhl",
+  "license": "MIT",
+  "devDependencies": {
+    "del": "^2.2.1",
+    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp-define-module": "^0.1.4",
+    "gulp-handlebars": "^4.0.0",
+    "handlebars": "^4.0.5",
+    "through2": "^2.0.1"
+  }
 }
