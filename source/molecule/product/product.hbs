@@ -1,13 +1,13 @@
 {{#component "atom/card" addClass=(joinClass "product rhythm" attribs.addClass)}}
 	{{#component "atom/heading"}}
-		{{title}}
+		{{attribs.title}}
 	{{/component}}
 	{{#component "atom/list" type="unordered"}}
-		{{#each features}}
+		{{#each attribs.features}}
 			{{#component "atom/list-item"}}{{.}}{{/component}}
 		{{/each}}
 	{{/component}}
-	{{#component "atom/button" href=url}}
-		{{btn-text}}
+	{{#component "atom/button" href=attribs.url}}
+		Learn More
 	{{/component}}
 {{/component}}

@@ -1,5 +1,8 @@
 <div {{classAttrib "productlist" attribs.addClass}}>
-	{{#each products as |product|}}
-		{{component "molecule/product" product}}
+	{{#each attribs.products as |product|}}
+		{{component "molecule/product"
+				title=product.title
+				url=product.url
+				feature=product.details}}
 	{{/each}}
 </div>
