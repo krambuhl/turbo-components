@@ -11,6 +11,7 @@
     "del": "^2.2.1",
     "gulp": "github:gulpjs/gulp#4.0",
     "gulp-define-module": "^0.1.4",
+    "gulp-file": "^0.3.0",
     "gulp-handlebars": "^4.0.0",
     "handlebars": "^4.0.5",
     "through2": "^2.0.1"
