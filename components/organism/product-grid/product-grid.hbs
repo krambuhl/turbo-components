@@ -1,8 +1,9 @@
-<div {{classAttrib "productlist" attribs.addClass}}>
+{{#component "atom/card-grid" addClass=(joinSpace "product-grid" attribs.addClass)}}
 	{{#each attribs.products as |product|}}
 		{{component "molecule/product"
+        addClass="product-grid__item"
 				title=product.title
 				url=product.url
 				feature=product.details}}
 	{{/each}}
-</div>
+{{/component}}

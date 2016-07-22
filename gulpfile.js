@@ -8,7 +8,9 @@ const handlebars = require('gulp-handlebars');
 const defineModule = require('gulp-define-module');
 
 const paths = {
-  src: 'source',
+  components: 'components',
+  tests: 'tests',
+  preview: 'preview',
   dest: 'dist'
 };
 
@@ -17,14 +19,21 @@ const globs = {
 };
 
 const getTemplateName = file => {
+  return file.basename.substr(0, file.basename.length - file.extname.length); 
+};
+
+const getTemplateType = file => {
   const base = file.path.substr(file.base.length);
-  return base.substr(0, base.lastIndexOf('/'));
+  const name = base.substr(0, base.lastIndexOf('/'));
+  return name.substr(0, name.indexOf('/'));
 };
 
 const createTemplateRequirements = templates => {
   const reqs = templates.map(file => {
     const name = getTemplateName(file);
-    return `"${name}": require("./${name}")`;
+    const type = getTemplateType(file);
+
+    return `"${type}/${name}": require("./${type}/${name}/${name}.js")`;
   }, {});
 
   return `{ ${reqs.join(', ')} }`;
@@ -32,11 +41,11 @@ const createTemplateRequirements = templates => {
 
 
 function clean() {
-  return del(paths.dest);
+  return del([paths.dest, paths.preview]);
 }
 
 function compileTemplates() {
-  return gulp.src(path.join(paths.src, globs.hbs))
+  return gulp.src(path.join(paths.components, globs.hbs))
     .pipe(handlebars())
     .pipe(defineModule('node'))
     .pipe(gulp.dest(paths.dest));
@@ -44,7 +53,7 @@ function compileTemplates() {
 
 function createTemplateIndex(done) {
   let templates = [];
-  return gulp.src(path.join(paths.src, globs.hbs))
+  return gulp.src(path.join(paths.components, globs.hbs))
     .pipe(through.obj(function(file, enc, next) {
       templates.push(file);
       next();
