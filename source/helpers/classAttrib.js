@@ -11,10 +11,7 @@
 // <div class="card card-light card--big">Whoa Dude!</div>
 // ```
 
-const joinClass = require('./joinClass');
-const helper = Handlebars => () => `class="${ joinClass.apply(undefined, arguments) }"`;
-
-module.exports = {
-  register: Handlebars => Handlebars.registerHelper('classAttrib', helper(Handlebars)),
-  helper: helper
-};
+import joinSpace from './joinSpace';
+export default classAttrib = Handlebars => (...classList) => {
+  return `class="${ joinSpace(...classList) }"`;
+}

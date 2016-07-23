@@ -8,9 +8,8 @@ const handlebars = require('gulp-handlebars');
 const defineModule = require('gulp-define-module');
 
 const paths = {
-  components: 'components',
+  components: 'source/components',
   tests: 'tests',
-  preview: 'preview',
   dest: 'dist'
 };
 
@@ -36,12 +35,12 @@ const createTemplateRequirements = templates => {
     return `"${type}/${name}": require("./${type}/${name}/${name}.js")`;
   }, {});
 
-  return `{ ${reqs.join(', ')} }`;
+  return `{ \n  ${reqs.join(',\n  ')} \n}`;
 };
 
 
 function clean() {
-  return del([paths.dest, paths.preview]);
+  return del(paths.dest);
 }
 
 function compileTemplates() {

@@ -11,8 +11,8 @@
 // {{#component data attr=value}}Why Hello{{/component}}
 // ```
 
-const helper = Handlebars => {
-  const getTemplate = name => {
+export default component = Handlebars => {
+  const getTemplateFn = name => {
     const template = Handlebars.partials[name];
 
     if (template === null) {
@@ -41,9 +41,4 @@ const helper = Handlebars => {
 
     return template(context, { data: data });
   };
-};
-
-module.exports = {
-  register: Handlebars => Handlebars.registerHelper('component', helper(Handlebars)),
-  helper: helper
 };

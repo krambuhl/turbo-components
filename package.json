@@ -5,6 +5,7 @@
     "build": "gulp build",
     "precommit": "npm run build"
   },
+  "main": "dist/index.js",
   "author": "Evan Krambuhl",
   "license": "MIT",
   "devDependencies": {
