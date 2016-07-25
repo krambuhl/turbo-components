@@ -21,7 +21,7 @@ comoponent.renderStyle = reflectoPostCSS({
   ext: ['.css', '.scss'],
   plugins: [
     autoprefixer(),
-    reflectoImport()
+    reflect()
   ]
 });
 

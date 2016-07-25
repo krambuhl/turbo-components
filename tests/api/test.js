@@ -1,27 +1,28 @@
-
-// use it
-
-import components, { render } from 'turbo-components';
+// their stuff
 import fs from 'fs';
-import throughMap from 'through2-map';
 
-const {
-	'atom/card' as Card,
-	'atom/card-grid' as CardGrid
-} = components.templates;
+// import render tool
+import { render } from 'turbo-components';
 
+// import template to render 
+import { 
+  'organism/product-list' as ProductList,
+  'organism/product-list--grid' as ProductListGrid 
+} from 'turbo-components/templates';
 
-render(CardGrid, { addClass: 'l-cards' }, 
-	fs.renderFile('/card-data.json')
-		.pipe(JSON.parse)
-		.pipe(throughMap((file, next) => {
-			next(null, file)
-		}))
-)
-render(Card, { }, [
-	fs.readFile('/hazzah.txt');
-])
+// create a reference to a container
+const container = document.getElementById('container');
+const data = JSON.parse(fs.readFileSync(__dirname + '/data.json'));
 
+// render the normal product list by default;
+render(container, ProductList, data);
 
-
-
+// render differnt component based on toggle control
+document.getElementById('toggle')
+  .addEventListener('click', ev => {
+    if (ev.target.classList.has('js-toggle-grid')) {
+      render(container, ProductListGrid, data);
+    } else if (ev.target.classList.has('js-toggle-list')) {
+      render(container, ProductList, data);
+    }
+  });
