@@ -1,11 +1,13 @@
-{{#component "atom/html-wrapper" page-name="search"}}
-  <header>{{attribs.pageName}}</header>
+<header>{{attribs.pageName}}</header>
 
-  {{#if (eq attribs.displayMode "grid")}}
-    {{component "organism/product-grid" addClass="search-results" products=attribs.myproducts}}
-  {{else}}
-    {{component "organism/product-list" addClass="search-results" products=attribs.myproducts}}
-  {{/if}}
+{{#if (eq attribs.displayMode "grid")}}
+  {{component "organism/product-grid"
+      addClass="search-results"
+      products=attribs.myproducts}}
+{{else}}
+  {{component "organism/product-list"
+      addClass="search-results"
+      products=attribs.myproducts}}
+{{/if}}
 
-  <footer>&copy; Copyright {{date 'YYYY'}}</footer>
-{{/component}}
+<footer>&copy; Copyright {{date 'YYYY'}}</footer>

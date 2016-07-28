@@ -2,7 +2,7 @@ import Reflecto from 'reflecto';
 
 import reflectoHandlebars from 'reflecto-handlebars';
 import Handlebars from 'Handlebars';
-import hbsHelpers from './hbs-helpers';
+import hbsHelpers from './helpers';
 
 import templates from './templates'; // generated from gulp `template-index` task
 import styles from './styles'; // generated from gulp `style-index` task
