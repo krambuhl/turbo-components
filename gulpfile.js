@@ -71,12 +71,16 @@ function templates(done) {
   let templates = [];
   return gulp.src(path.join(paths.src.components, globs.hbs))
     .pipe(through.obj(function(file, enc, next) {
-      file.contents = new Buffer(Handlebars.precompile(file.contents.toString()));
-
+      const res = Handlebars.precompile(file.contents.toString());
+      file.contents = new Buffer(`Handlebars.template(${res})`);
       templates.push(file);
       next(null, file);
     }))
-    .pipe(defineModule('node'))
+    .pipe(defineModule('node', {
+      require: {
+        Handlebars: 'handlebars/runtime'
+      }
+    }))
     .pipe(gulp.dest(paths.dest.components))
     .on('end', function() {
       file('templates.js', createIndex(templates, createTemplateRequirement))
