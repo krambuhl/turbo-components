@@ -6,6 +6,7 @@ const path = require('path');
 
 const handlebars = require('gulp-handlebars');
 const defineModule = require('gulp-define-module');
+const babel = require('gulp-babel');
 
 const paths = {
   tests: 'tests',
@@ -114,14 +115,16 @@ function compileHelpers(done) {
 
 
 const createScriptRequirement = file => {
+  const cat = getFileCategory(file);
   const ns = getFileNamespace(file);
   const name = getFileName(file);
-  return createRequirement(`${ns}-${name}`, `components/${ns}/index.js`);
+  return createRequirement(`${ns}-${name}`, `components/${cat}/${ns}/index.js`);
 };
 
 function compileScripts(done) {
   let scripts = [];
   return gulp.src(path.join(paths.src.components, globs.js))
+    .pipe(babel({ presets: ['es2015'] }))
     .pipe(through.obj(function(file, enc, next) {
       scripts.push(file);
       next(null, file);
@@ -139,15 +142,14 @@ function compileScripts(done) {
 
 function transpileIndex() {
   return gulp.src(path.join(paths.src.root, 'index.js'))
-    .pipe(gulp.dest(path.join(paths.dest.root)))
+    .pipe(babel({ presets: ['es2015'] }))
+    .pipe(gulp.dest(path.join(paths.dest.root)));
 }
 
 gulp.task('build', gulp.series(
   clean,
-  gulp.parallel(
-    compileTemplates,
-    compileScripts,
-    compileHelpers,
-    transpileIndex
-  )
+  compileTemplates,
+  compileScripts,
+  compileHelpers,
+  transpileIndex
 ));

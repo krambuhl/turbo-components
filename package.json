@@ -9,8 +9,10 @@
   "author": "Evan Krambuhl",
   "license": "MIT",
   "devDependencies": {
+    "babel-preset-es2015": "^6.9.0",
     "del": "^2.2.1",
     "gulp": "github:gulpjs/gulp#4.0",
+    "gulp-babel": "^6.1.2",
     "gulp-define-module": "^0.1.4",
     "gulp-file": "^0.3.0",
     "gulp-handlebars": "^4.0.0",
