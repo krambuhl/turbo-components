@@ -4,7 +4,7 @@ const file = require('gulp-file');
 const through = require('through2');
 const path = require('path');
 
-const handlebars = require('gulp-handlebars');
+const Handlebars = require('handlebars');
 const defineModule = require('gulp-define-module');
 const babel = require('gulp-babel');
 
@@ -12,6 +12,7 @@ const paths = {
   tests: 'tests',
   src: {
     root: 'source',
+    lib: 'source/lib',
     helpers: 'source/helpers',
     components: 'source/components'
   },
@@ -57,6 +58,8 @@ function clean() {
 }
 
 
+/// tempaltes
+
 const createTemplateRequirement = file => {
   const ns = getFileNamespace(file);
   const cat = getFileCategory(file);
@@ -64,19 +67,16 @@ const createTemplateRequirement = file => {
   return createRequirement(`${cat}/${name}`, `components/${cat}/${ns}/${name}.js`);
 };
 
-function compileTemplates(done) {
+function templates(done) {
   let templates = [];
   return gulp.src(path.join(paths.src.components, globs.hbs))
     .pipe(through.obj(function(file, enc, next) {
+      file.contents = new Buffer(Handlebars.precompile(file.contents.toString()));
+
       templates.push(file);
       next(null, file);
     }))
-    .pipe(handlebars())
-    .pipe(defineModule('node', {
-      require: {
-        Handlebars: 'handlebars/runtime'
-      }
-    }))
+    .pipe(defineModule('node'))
     .pipe(gulp.dest(paths.dest.components))
     .on('end', function() {
       file('templates.js', createIndex(templates, createTemplateRequirement))
@@ -88,19 +88,28 @@ function compileTemplates(done) {
     });
 }
 
+function templatesWatch() {
+  gulp.watch([
+    path.join(paths.src.components, globs.hbs)
+  ], templates);
+}
+
+
+// template helpers
 
 const createHelperRequirement = file => {
   const name = getFileName(file);
-  return createRequirement(name, `helpers/${name}.js`);
+  return createRequirement(name, `helpers/${name}.js`) + '.default';
 };
 
-function compileHelpers(done) {
+function helpers(done) {
   let helpers = [];
   return gulp.src(path.join(paths.src.helpers, globs.js))
     .pipe(through.obj(function(file, enc, next) {
       helpers.push(file);
       next(null, file);
     }))
+    .pipe(babel({ presets: ['es2015'] }))
     .pipe(gulp.dest(paths.dest.helpers))
     .on('end', function() {
       file('helpers.js', createIndex(helpers, createHelperRequirement))
@@ -112,7 +121,14 @@ function compileHelpers(done) {
     });
 }
 
+function helpersWatch() {
+  gulp.watch([
+    path.join(paths.src.helpers, globs.js)
+  ], helpers);
+}
 
+
+// scripts
 
 const createScriptRequirement = file => {
   const cat = getFileCategory(file);
@@ -121,14 +137,14 @@ const createScriptRequirement = file => {
   return createRequirement(`${ns}-${name}`, `components/${cat}/${ns}/index.js`);
 };
 
-function compileScripts(done) {
+function scripts(done) {
   let scripts = [];
   return gulp.src(path.join(paths.src.components, globs.js))
-    .pipe(babel({ presets: ['es2015'] }))
     .pipe(through.obj(function(file, enc, next) {
       scripts.push(file);
       next(null, file);
     }))
+    .pipe(babel({ presets: ['es2015'] }))
     .pipe(gulp.dest(paths.dest.components))
     .on('end', function() {
       file('scripts.js', createIndex(scripts, createScriptRequirement))
@@ -140,16 +156,38 @@ function compileScripts(done) {
     });
 }
 
-function transpileIndex() {
+function scriptsWatch() {
+  gulp.watch([
+    path.join(paths.src.components, globs.js)
+  ], scripts);
+}
+
+
+// central index
+
+function index() {
   return gulp.src(path.join(paths.src.root, 'index.js'))
+    .pipe(babel({ presets: ['es2015'] }))
+    .pipe(gulp.dest(path.join(paths.dest.root)));
+}
+
+function lib() {
+  return gulp.src(path.join(paths.src.lib, globs.js))
     .pipe(babel({ presets: ['es2015'] }))
     .pipe(gulp.dest(path.join(paths.dest.root)));
 }
 
 gulp.task('build', gulp.series(
   clean,
-  compileTemplates,
-  compileScripts,
-  compileHelpers,
-  transpileIndex
+  templates,
+  scripts,
+  helpers,
+  index,
+  lib
+));
+
+gulp.task('watch', gulp.parallel(
+  templatesWatch,
+  helpersWatch,
+  scriptsWatch
 ));

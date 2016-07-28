@@ -11,34 +11,38 @@
 // {{#component data attr=value}}Why Hello{{/component}}
 // ```
 
-export default component = Handlebars => {
-  const getTemplateFn = name => {
-    const template = Handlebars.partials[name];
+import Handlebars from 'handlebars/runtime';
 
-    if (template === null) {
-      throw new Error('Missing partial: \'' + name + '\'');
-    }
+const getTemplateFn = name => {
+  const template = Handlebars.partials[name];
 
-    if (typeof template !== 'function') {
-      return Handlebars.compile(template);
-    }
+  if (template === null) {
+    throw new Error('Missing partial: \'' + name + '\'');
+  }
 
-    return template;
-  };
+  if (typeof template !== 'function') {
+    return Handlebars.template(template);
+  }
 
-  return (name, locals, opts) => {
-    if (arguments.length === 2) {
-      opts = locals;
-      locals = {};
-    }
+  return template;
+};
 
-    const template = getTemplateFn(name);
-    const data = Handlebars.createFrame(opts.data);
-    const cdata = Handlebars.Utils.extend({ }, this, locals, { attribs: opts.hash });
-    const context = Handlebars.Utils.extend({ }, cdata, {
-      children: opts.fn(cdata, { data: data })
-    });
+export default function(name, locals, opts) {
+  if (arguments.length === 2) {
+    opts = locals;
+    locals = { };
+  }
 
-    return template(context, { data: data });
-  };
+  const template = getTemplateFn(name);
+  const data = Handlebars.createFrame(opts.data);
+  const cdata = Handlebars.Utils.extend({ }, this, locals, { attribs: opts.hash });
+  console.log('cdata', opts.data, opts.hash);
+
+  const context = Handlebars.Utils.extend({ }, cdata, {
+    children: opts.fn(cdata, { data: data })
+  });
+
+  // console.log('cdata', template, context)
+
+  return new Handlebars.SafeString(template(context, { data: data }));
 };

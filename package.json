@@ -3,7 +3,9 @@
   "description": "This is a repo for pulling versioned components using git",
   "scripts": {
     "build": "gulp build",
-    "precommit": "npm run build"
+    "watch": "gulp watch",
+    "precommit": "npm run build",
+    "test": "cd tests && npm test"
   },
   "main": "dist/index.js",
   "author": "Evan Krambuhl",

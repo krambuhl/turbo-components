@@ -6,4 +6,6 @@
 // {{#if (eq index 10) }}<p>Look at this 10 thing!</p>{{/if}}
 // ```
 
-export default eq = Handlebars => (a, b) => a === b;
+const eq = (a, b) => a === b;
+
+export default eq;

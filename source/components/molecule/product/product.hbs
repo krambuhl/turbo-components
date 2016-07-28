@@ -1,12 +1,14 @@
 {{#component "atom/card" addClass=(joinSpace "product rhythm" attribs.addClass)}}
 	{{#component "atom/heading"}}
-		{{attribs.title}}
+		{{{attribs.title}}}
 	{{/component}}
-	{{#component "atom/list" type="unordered"}}
-		{{#each attribs.features}}
-			{{#component "atom/list-item"}}{{.}}{{/component}}
-		{{/each}}
-	{{/component}}
+	{{#if attribs.features}}
+		{{#component "atom/list" type="unordered"}}
+			{{#each attribs.features}}
+				{{#component "atom/list-item"}}{{.}}{{/component}}
+			{{/each}}
+		{{/component}}
+	{{/if}}
 	{{#component "atom/button" href=attribs.url}}
 		Learn More
 	{{/component}}
