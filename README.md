@@ -6,26 +6,35 @@ This is a testing repo for pulling versioned components using git and version ta
 
 ## Atoms 
 
-- button
-- card
-- card-list
-- heading
-- heading__h1
-- heading__h2
-- heading__h3
-- heading__h4
-- heading__h5
-- heading__h6
-- html
-- html__head
-- html__foot
-- list
-- list-item
+- `atom/button`
+- `atom/button--cta`
+- `atom/card`
+- `atom/card-list`
+- `atom/card-list--grid`
+- `atom/heading`
+- `atom/heading__h1`
+- `atom/heading__h2`
+- `atom/heading__h3`
+- `atom/heading__h4`
+- `atom/heading__h5`
+- `atom/heading__h6`
+- `atom/html`
+- `atom/html__head`
+- `atom/html__foot`
+- `atom/list`
+- `atom/list__item`
 
 ## Molecules
 
-- product
+- `molecule/product`
 
 ## Organisms
 
-- productlist
+- `organisms/product-list`
+- `organisms/product-list--grid`
+
+## Templates
+
+- `template/search`
+
+
