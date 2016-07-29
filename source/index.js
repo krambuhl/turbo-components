@@ -1,7 +1,7 @@
 // import Reflecto from 'reflecto';
 
 // import reflectoHandlebars from 'reflecto-handlebars';
-// import Handlebars from 'Handlebars';
+import Handlebars from 'Handlebars';
 import hbsHelpers from './helpers';
 
 import templates from './templates'; // generated from gulp `template-index` task
@@ -33,6 +33,5 @@ import scripts from './scripts'; // generated from gulp `script-index` task
 export default {};
 export {
   templates,
-  scripts,
-  // styles
+  scripts
 };

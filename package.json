@@ -5,7 +5,7 @@
     "build": "gulp build",
     "watch": "gulp watch",
     "precommit": "npm run build",
-    "test": "cd tests && npm test"
+    "test": "node ./tests/test.js"
   },
   "main": "dist/index.js",
   "author": "Evan Krambuhl",
@@ -17,7 +17,6 @@
     "gulp-babel": "^6.1.2",
     "gulp-define-module": "^0.1.4",
     "gulp-file": "^0.3.0",
-    "gulp-handlebars": "^4.0.0",
     "handlebars": "^4.0.5",
     "through2": "^2.0.1"
   }

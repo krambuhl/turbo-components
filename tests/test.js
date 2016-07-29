@@ -1,10 +1,13 @@
 const Handlebars = require('handlebars/runtime');
+
+const components = require('turbo-components');
 const helpers = require('turbo-components/dist/helpers');
-
-Handlebars.registerHelper(require('turbo-components/dist/helpers'));
-Handlebars.registerPartial(require('turbo-components/dist/templates'));
-
 const templates = require('turbo-components/dist/templates');
+
+Handlebars.registerHelper(helpers);
+Handlebars.registerPartial(templates);
+
+// console.log(Handlebars);
 
 // current
 const Product = templates['molecule/product'];
