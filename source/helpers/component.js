@@ -34,15 +34,14 @@ export default function(name, locals, opts) {
   }
 
   const template = getTemplateFn(name);
-  const data = Handlebars.createFrame(opts.data);
+  const data = Handlebars.createFrame(opts.data); 
   const cdata = Handlebars.Utils.extend({ }, this, locals, { attribs: opts.hash });
-  console.log('cdata', opts.data, opts.hash);
 
-  const context = Handlebars.Utils.extend({ }, cdata, {
-    children: opts.fn(cdata, { data: data })
+  const context = Handlebars.Utils.extend({ }, this, cdata, {
+    children: opts.fn(cdata, { data: cdata })
   });
 
-  // console.log('cdata', template, context)
+  const res = template(context, { data: cdata });
 
-  return new Handlebars.SafeString(template(context, { data: data }));
+  return new Handlebars.SafeString(res);
 };
