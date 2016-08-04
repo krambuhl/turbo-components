@@ -33,15 +33,14 @@ export default function(name, locals, opts) {
     locals = { };
   }
 
-  const template = getTemplateFn(name);
-  const data = Handlebars.createFrame(opts.data); 
+  const template = getTemplateFn(name); 
+  
   const cdata = Handlebars.Utils.extend({ }, this, locals, { attribs: opts.hash });
-
   const context = Handlebars.Utils.extend({ }, this, cdata, {
-    children: opts.fn(cdata, { data: cdata })
+    children: opts.fn(cdata)
   });
 
-  const res = template(context, { data: cdata });
+  const res = template(context);
 
   return new Handlebars.SafeString(res);
 };

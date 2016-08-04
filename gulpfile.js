@@ -3,10 +3,13 @@ const gulp = require('gulp');
 const file = require('gulp-file');
 const through = require('through2');
 const path = require('path');
+const _ = require('lodash');
 
 const Handlebars = require('handlebars');
 const defineModule = require('gulp-define-module');
 const babel = require('gulp-babel');
+const wrap = require('gulp-wrap');
+const prettify = require('gulp-jsbeautifier');
 
 const paths = {
   tests: 'tests',
@@ -18,6 +21,7 @@ const paths = {
   },
   dest: {
     root: 'dist',
+    lib: 'dist/lib',
     helpers: 'dist/helpers',
     components: 'dist/components'
   }
@@ -27,6 +31,8 @@ const globs = {
   hbs: '**/*.hbs',
   js: '**/*.js'
 };
+
+// general purpose functionators
 
 const getFileName = file => {
   return file.basename.substr(0, file.basename.length - file.extname.length); 
@@ -52,13 +58,27 @@ const createIndex = (templates, requirementCreator) => {
 
 const createRequirement = (name, path) => `"${name}": require("./${path}")`;
 
+// general mini-gulp plugs
+
+const addFileToArray = arr =>
+  through.obj(function(file, enc, done) {
+    arr.push(file);
+    done(null, file);
+  });
+
+
+//
+// Tasks
+//
+
+/// Clean
 
 function clean() {
   return del(paths.dest.root);
 }
 
 
-/// tempaltes
+/// Templates
 
 const createTemplateRequirement = file => {
   const ns = getFileNamespace(file);
@@ -67,20 +87,75 @@ const createTemplateRequirement = file => {
   return createRequirement(`${cat}/${name}`, `components/${cat}/${ns}/${name}.js`);
 };
 
+const precompileTemplates = opts => 
+  through.obj(function(file, enc, done) {
+    const res = Handlebars.precompile(file.contents.toString(), {
+      strict: false,
+      data: false
+    });
+
+    file.contents = new Buffer(res);
+    done(null, file);
+  });
+
+const matchRequirements = string => {
+  // wow this actually works...
+  // for the moment
+  const matches = string.match(/,\"(.+?)\",{\"name\":\"component\"/gi);
+  
+  if (matches) {
+    return _.uniq(matches.map(name => {
+      return name.split('"')[1];
+    }));
+  }
+
+  return [];
+}
+
+const getTemplateName = string => {
+  var cat = string.substr(0, string.indexOf('/'));
+  var name = string.substr(string.indexOf('/') + 1);
+  var ns = name;
+
+  if (name.indexOf('__') !== -1) {
+    ns = name.substr(0, name.indexOf('__'));
+  }
+
+  if (ns.indexOf('--') !== -1) {
+    ns = ns.substr(0, ns.indexOf('--'));
+  }
+
+  return { cat, ns, name };
+};
+
+const getTemplateRequirements = string => {
+  return matchRequirements(string)
+    .map(req => {
+      var { cat, ns, name } = getTemplateName(req);
+      return `Handlebars.registerPartial("${cat}/${name}", require("../../${cat}/${ns}/${name}.js"));`
+    })
+    .join('');
+};
+
+const addTemplateRequirements = opts => 
+  through.obj(function(file, enc, done) {
+    var reqs = getTemplateRequirements(file.contents.toString());
+    file.contents = new Buffer(reqs + file.contents.toString()); 
+    done(null, file);
+  });
+
 function templates(done) {
   let templates = [];
+  let requirements =  {};
+
   return gulp.src(path.join(paths.src.components, globs.hbs))
-    .pipe(through.obj(function(file, enc, next) {
-      const res = Handlebars.precompile(file.contents.toString());
-      file.contents = new Buffer(`Handlebars.template(${res})`);
-      templates.push(file);
-      next(null, file);
-    }))
-    .pipe(defineModule('node', {
-      require: {
-        Handlebars: 'handlebars/runtime'
-      }
-    }))
+    .pipe(precompileTemplates())
+    .pipe(addFileToArray(templates))
+    .pipe(wrap('Handlebars.template(<%= contents %>)'))
+    .pipe(defineModule('node'))
+    .pipe(addTemplateRequirements())
+    .pipe(wrap('var Handlebars = require("../../../lib/handlebars");<%= contents %>'))
+    .pipe(prettify())
     .pipe(gulp.dest(paths.dest.components))
     .on('end', function() {
       file('templates.js', createIndex(templates, createTemplateRequirement))
@@ -99,8 +174,7 @@ function templatesWatch() {
 }
 
 
-// template helpers
-
+// Template Helpers
 const createHelperRequirement = file => {
   const name = getFileName(file);
   return createRequirement(name, `helpers/${name}.js`) + '.default';
@@ -109,10 +183,7 @@ const createHelperRequirement = file => {
 function helpers(done) {
   let helpers = [];
   return gulp.src(path.join(paths.src.helpers, globs.js))
-    .pipe(through.obj(function(file, enc, next) {
-      helpers.push(file);
-      next(null, file);
-    }))
+    .pipe(addFileToArray(helpers))
     .pipe(babel({ presets: ['es2015'] }))
     .pipe(gulp.dest(paths.dest.helpers))
     .on('end', function() {
@@ -144,10 +215,7 @@ const createScriptRequirement = file => {
 function scripts(done) {
   let scripts = [];
   return gulp.src(path.join(paths.src.components, globs.js))
-    .pipe(through.obj(function(file, enc, next) {
-      scripts.push(file);
-      next(null, file);
-    }))
+    .pipe(addFileToArray(scripts))
     .pipe(babel({ presets: ['es2015'] }))
     .pipe(gulp.dest(paths.dest.components))
     .on('end', function() {
@@ -178,7 +246,7 @@ function index() {
 function lib() {
   return gulp.src(path.join(paths.src.lib, globs.js))
     .pipe(babel({ presets: ['es2015'] }))
-    .pipe(gulp.dest(path.join(paths.dest.root)));
+    .pipe(gulp.dest(path.join(paths.dest.lib)));
 }
 
 gulp.task('build', gulp.series(

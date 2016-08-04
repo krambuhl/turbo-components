@@ -1,7 +1,7 @@
 <header>{{attribs.pageName}}</header>
 
 {{#if (eq attribs.displayMode "grid")}}
-  {{component "organism/product-grid"
+  {{component "organism/product-list--grid"
       addClass="search-results"
       products=attribs.myproducts}}
 {{else}}

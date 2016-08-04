@@ -17,7 +17,10 @@
     "gulp-babel": "^6.1.2",
     "gulp-define-module": "^0.1.4",
     "gulp-file": "^0.3.0",
+    "gulp-jsbeautifier": "^2.0.3",
+    "gulp-wrap": "^0.13.0",
     "handlebars": "^4.0.5",
+    "lodash": "^4.14.1",
     "through2": "^2.0.1"
   }
 }

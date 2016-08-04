@@ -1,14 +1,5 @@
-const Handlebars = require('handlebars/runtime');
-
-const components = require('turbo-components');
-const helpers = require('turbo-components/dist/helpers');
-const templates = require('turbo-components/dist/templates');
-
-Handlebars.registerHelper(helpers);
-Handlebars.registerPartial(templates);
-
 // Atom
-const Button = templates['atom/button'];
+const Button = require('turbo-components/dist/components/atom/button/button');
 const buttonRes = Button({
   attribs: {
     addClass: 'product--world-card',
@@ -17,11 +8,11 @@ const buttonRes = Button({
   children: "Hello World"
 });
 
-console.log(buttonRes);
+// console.log(buttonRes);
 
 
-// Molecule
-const Deep = templates['molecule/deep'];
+// Deep Simple Molecule
+const Deep = require('turbo-components/dist/components/molecule/deep/deep');
 const deepRes = Deep({
   attribs: {
     addClass: 'product--world-card',
@@ -33,9 +24,10 @@ const deepRes = Deep({
   }
 });
 
-console.log(deepRes);
+// console.log(deepRes);
 
-const Product = templates['molecule/product'];
+// Real-life Module
+const Product = require('turbo-components/dist/components/molecule/product/product');
 const productRes = Product({
   attribs: {
     addClass: 'product--world-card',
