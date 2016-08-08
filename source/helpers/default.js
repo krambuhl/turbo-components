@@ -6,10 +6,6 @@
 // {{default undefinedVar "boogers"}}
 // ```
 
-const defaultFn = (...args) => {
-  return args.find(function(arg) {
-    return !!arg;
-  });
+export default function(...args) {
+  return args.find(arg => !!arg);
 }
-
-export default defaultFn;

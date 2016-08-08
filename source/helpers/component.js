@@ -13,15 +13,14 @@
 
 import Handlebars from 'handlebars/runtime';
 
+// takes a template name
+// and returns a template function
 const getTemplateFn = name => {
   const template = Handlebars.partials[name];
 
+  // throw an error if partial is missing
   if (template === null) {
     throw new Error('Missing partial: \'' + name + '\'');
-  }
-
-  if (typeof template !== 'function') {
-    return Handlebars.template(template);
   }
 
   return template;
@@ -33,13 +32,18 @@ export default function(name, locals, opts) {
     locals = { };
   }
 
+  // get the template
   const template = getTemplateFn(name); 
   
+  // define data
   const cdata = Handlebars.Utils.extend({ }, this, locals, { attribs: opts.hash });
-  const context = Handlebars.Utils.extend({ }, this, cdata, {
+
+  // 
+  const context = Handlebars.Utils.extend({ }, cdata, {
     children: opts.fn(cdata)
   });
 
+  // get template result
   const res = template(context);
 
   return new Handlebars.SafeString(res);

@@ -10,9 +10,10 @@
 // { addClass: 'card--big' }
 // <div class="card card-light card--big">Whoa Dude!</div>
 // ```
+
 import Handlebars from 'handlebars/runtime';
 import joinSpace from './joinSpace';
 
 export default function(...classList) {
-  return new Handlebars.SafeString(`class="${ joinSpace(...classList) }"`);
+  return `class="${ joinSpace(...classList) }"`;
 }
