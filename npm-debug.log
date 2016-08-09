@@ -2,20 +2,20 @@
 1 verbose cli [ '/Users/evan/.nvm/versions/node/v6.2.0/bin/node',
 1 verbose cli   '/Users/evan/.nvm/versions/node/v6.2.0/bin/npm',
 1 verbose cli   'run',
-1 verbose cli   'build' ]
+1 verbose cli   'watch' ]
 2 info using npm@3.8.9
 3 info using node@v6.2.0
-4 verbose run-script [ 'prebuild', 'build', 'postbuild' ]
-5 info lifecycle turbo-components@~prebuild: turbo-components@
-6 silly lifecycle turbo-components@~prebuild: no script for prebuild, continuing
-7 info lifecycle turbo-components@~build: turbo-components@
-8 verbose lifecycle turbo-components@~build: unsafe-perm in lifecycle true
-9 verbose lifecycle turbo-components@~build: PATH: /Users/evan/.nvm/versions/node/v6.2.0/lib/node_modules/npm/bin/node-gyp-bin:/Users/evan/Sites/il7/github/turbo/turbo-components/node_modules/.bin:/Users/evan/.nvm/versions/node/v6.2.0/bin:/Users/evan/.nvm/versions/node/v6.2.0/bin:/usr/local/heroku/bin:/Users/evan/.rvm/gems/ruby-2.2.2/bin:/Users/evan/.rvm/gems/ruby-2.2.2@global/bin:/Users/evan/.rvm/rubies/ruby-2.2.2/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/evan/.rvm/bin
-10 verbose lifecycle turbo-components@~build: CWD: /Users/evan/Sites/il7/github/turbo/turbo-components
-11 silly lifecycle turbo-components@~build: Args: [ '-c', 'gulp build' ]
-12 silly lifecycle turbo-components@~build: Returned: code: 1  signal: null
-13 info lifecycle turbo-components@~build: Failed to exec build script
-14 verbose stack Error: turbo-components@ build: `gulp build`
+4 verbose run-script [ 'prewatch', 'watch', 'postwatch' ]
+5 info lifecycle turbo-components@~prewatch: turbo-components@
+6 silly lifecycle turbo-components@~prewatch: no script for prewatch, continuing
+7 info lifecycle turbo-components@~watch: turbo-components@
+8 verbose lifecycle turbo-components@~watch: unsafe-perm in lifecycle true
+9 verbose lifecycle turbo-components@~watch: PATH: /Users/evan/.nvm/versions/node/v6.2.0/lib/node_modules/npm/bin/node-gyp-bin:/Users/evan/Sites/il7/github/turbo/turbo-components/node_modules/.bin:/Users/evan/.nvm/versions/node/v6.2.0/bin:/Users/evan/.nvm/versions/node/v6.2.0/bin:/usr/local/heroku/bin:/Users/evan/.rvm/gems/ruby-2.2.2/bin:/Users/evan/.rvm/gems/ruby-2.2.2@global/bin:/Users/evan/.rvm/rubies/ruby-2.2.2/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/evan/.rvm/bin
+10 verbose lifecycle turbo-components@~watch: CWD: /Users/evan/Sites/il7/github/turbo/turbo-components
+11 silly lifecycle turbo-components@~watch: Args: [ '-c', 'gulp watch' ]
+12 silly lifecycle turbo-components@~watch: Returned: code: 1  signal: null
+13 info lifecycle turbo-components@~watch: Failed to exec watch script
+14 verbose stack Error: turbo-components@ watch: `gulp watch`
 14 verbose stack Exit status 1
 14 verbose stack     at EventEmitter.<anonymous> (/Users/evan/.nvm/versions/node/v6.2.0/lib/node_modules/npm/lib/utils/lifecycle.js:245:16)
 14 verbose stack     at emitTwo (events.js:106:13)
@@ -28,18 +28,18 @@
 15 verbose pkgid turbo-components@
 16 verbose cwd /Users/evan/Sites/il7/github/turbo/turbo-components
 17 error Darwin 15.6.0
-18 error argv "/Users/evan/.nvm/versions/node/v6.2.0/bin/node" "/Users/evan/.nvm/versions/node/v6.2.0/bin/npm" "run" "build"
+18 error argv "/Users/evan/.nvm/versions/node/v6.2.0/bin/node" "/Users/evan/.nvm/versions/node/v6.2.0/bin/npm" "run" "watch"
 19 error node v6.2.0
 20 error npm  v3.8.9
 21 error code ELIFECYCLE
-22 error turbo-components@ build: `gulp build`
+22 error turbo-components@ watch: `gulp watch`
 22 error Exit status 1
-23 error Failed at the turbo-components@ build script 'gulp build'.
+23 error Failed at the turbo-components@ watch script 'gulp watch'.
 23 error Make sure you have the latest version of node.js and npm installed.
 23 error If you do, this is most likely a problem with the turbo-components package,
 23 error not with npm itself.
 23 error Tell the author that this fails on your system:
-23 error     gulp build
+23 error     gulp watch
 23 error You can get information on how to open an issue for this project with:
 23 error     npm bugs turbo-components
 23 error Or if that isn't available, you can get their info via:

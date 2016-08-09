@@ -8,31 +8,20 @@ const {
   globs
 } = require('./config');
 
-const transpile = (src, dest) => {
-  return gulp.src(src)
+const transpile = (src, dest) => 
+  gulp.src(src)
     .pipe(babel({ presets: ['es2015'] }))
     .pipe(gulp.dest(dest));
-}
 
-const transpileIndex = transpile(
-  path.join(paths.src.root, 'index.js'),
-  paths.dest.root
-);
-
-const transpileLib = transpile(
-  path.join(paths.src.root, 'index.js'),
-  paths.dest.root
-);
+const transpileIndex = transpile(path.join(paths.src.root, '*.js'), paths.dest.root);
+const transpileLib = transpile(path.join(paths.src.lib, globs.js), paths.dest.lib);
 
 function compileLib() {
-  return merge(
-    transpileIndex,
-    transpileLib
-  );
+  return merge(transpileIndex, transpileLib);
 }
 
 function watchLib() {
-  gulp.watch(path.join(paths.src.root, 'index.js'), transpileIndex);
+  gulp.watch(path.join(paths.src.root, '*.js'), transpileIndex);
   gulp.watch(path.join(paths.src.lib, globs.js), transpileLib);
 }
 

@@ -25,7 +25,7 @@ const createScriptRequirement = file => {
   const cat = getFileCategory(file);
   const ns = getFileNamespace(file);
   const name = getFileName(file);
-  return createRequirement(`${ns}-${name}`, `components/${cat}/${ns}/index.js`);
+  return createRequirement(`${ns}-${name}`, `${cat}/${ns}/index.js`);
 };
 
 function compileScripts(done) {
@@ -33,7 +33,7 @@ function compileScripts(done) {
   return gulp.src(path.join(paths.src.components, globs.js))
     .pipe(addFileToArray(scripts))
     .pipe(babel({ presets: ['es2015'] }))
-    .pipe(gulp.dest(paths.dest.components))
+    .pipe(gulp.dest(paths.dest.root))
     .on('end', function() {
       file('scripts.js', createIndex(scripts, createScriptRequirement))
         .pipe(defineModule('node'))
@@ -45,9 +45,7 @@ function compileScripts(done) {
 }
 
 function watchScripts() {
-  gulp.watch([
-    path.join(paths.src.components, globs.js)
-  ], compileScripts);
+  gulp.watch(path.join(paths.src.components, globs.js), compileScripts);
 }
 
 module.exports = {

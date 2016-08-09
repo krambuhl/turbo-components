@@ -45,9 +45,7 @@ function compileHelpers(done) {
 }
 
 function watchHelpers() {
-  gulp.watch([
-    path.join(paths.src.helpers, globs.js)
-  ], compileHelpers);
+  gulp.watch(path.join(paths.src.helpers, globs.js), compileHelpers);
 }
 
 module.exports = {

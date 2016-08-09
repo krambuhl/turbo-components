@@ -29,7 +29,7 @@ const createTemplateRequirement = file => {
   const ns = getFileNamespace(file);
   const cat = getFileCategory(file);
   const name = getFileName(file);
-  return createRequirement(`${cat}/${name}`, `components/${cat}/${ns}/${name}.js`);
+  return createRequirement(`${cat}/${name}`, `${cat}/${ns}/${name}.js`);
 };
 
 const precompileTemplates = opts => 
@@ -99,9 +99,9 @@ function compileTemplates(done) {
     .pipe(wrap('Handlebars.template(<%= contents %>)'))
     .pipe(defineModule('node'))
     .pipe(addTemplateRequirements())
-    .pipe(wrap('var Handlebars = require("../../../lib/handlebars");<%= contents %>'))
+    .pipe(wrap('var Handlebars = require("../../lib/handlebars");<%= contents %>'))
     .pipe(prettify())
-    .pipe(gulp.dest(paths.dest.components))
+    .pipe(gulp.dest(paths.dest.root))
     .on('end', function() {
       file('templates.js', createIndex(templates, createTemplateRequirement))
         .pipe(defineModule('node'))
@@ -113,9 +113,7 @@ function compileTemplates(done) {
 }
 
 function watchTemplates() {
-  gulp.watch([
-    path.join(paths.src.components, globs.hbs)
-  ], compileTemplates);
+  gulp.watch(path.join(paths.src.components, globs.hbs), compileTemplates);
 }
 
 module.exports = {

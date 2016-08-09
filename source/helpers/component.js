@@ -33,18 +33,20 @@ export default function(name, locals, opts) {
   }
 
   // get the template
-  const template = getTemplateFn(name); 
-  
-  // define data
-  const cdata = Handlebars.Utils.extend({ }, this, locals, { attribs: opts.hash });
+  const template = getTemplateFn(name);
 
-  // 
-  const context = Handlebars.Utils.extend({ }, cdata, {
-    children: opts.fn(cdata)
-  });
+  // console.log(name, template)
+  
+  // // define data
+  // const cdata = Handlebars.Utils.extend({ }, this, locals, { attribs: opts.hash });
+
+  // // 
+  // const context = Handlebars.Utils.extend({ }, cdata, {
+  //   children: opts.fn(cdata)
+  // });
 
   // get template result
-  const res = template(context);
+  const res = template({ });
 
   return new Handlebars.SafeString(res);
 };

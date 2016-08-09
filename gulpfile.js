@@ -1,23 +1,21 @@
-const del = require('del');
 const gulp = require('gulp');
 
-const { paths } = require('./build/config');
+// Clean
+const clean = require('./build/clean');
 
-/// Clean
-function clean() {
-  return del(paths.dest.root);
-}
-
-/// Templates
+// Templates
 const templates = require('./build/templates');
 
-// helpers
+// Helpers
 const helpers = require('./build/helpers');
 
-// scripts
+// Scripts
 const scripts = require('./build/scripts');
 
-// central index
+// Styles
+const styles = require('./build/styles');
+
+// Central index
 const lib = require('./build/lib');
 
 
@@ -26,6 +24,7 @@ gulp.task('build', gulp.series(
   gulp.parallel(
     templates.compileTemplates,
     scripts.compileScripts,
+    styles.compileStyles,
     helpers.compileHelpers,
     lib.compileLib
   )
@@ -34,6 +33,7 @@ gulp.task('build', gulp.series(
 gulp.task('watch', gulp.parallel(
   templates.watchTemplates,
   scripts.watchScripts,
+  styles.watchStyles,
   helpers.watchHelpers,
   lib.watchLib
 ));

@@ -2,21 +2,22 @@ const paths = {
   tests: 'tests',
   src: {
     root: 'source',
-    lib: 'source/lib',
     helpers: 'source/helpers',
-    components: 'source/components'
+    components: 'source/components',
+    pages: 'source/pages',
+    lib: 'source/lib'
   },
   dest: {
     root: 'dist',
     lib: 'dist/lib',
-    helpers: 'dist/helpers',
-    components: 'dist/components'
+    helpers: 'dist/helpers'
   }
 };
 
 const globs = {
   hbs: '**/*.hbs',
-  js: '**/*.js'
+  js: '**/*.js',
+  css: '**/*.{css,scss}'
 };
 
 module.exports = {
