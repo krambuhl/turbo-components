@@ -11,9 +11,12 @@
 // <div class="card card-light card--big">Whoa Dude!</div>
 // ```
 
-import Handlebars from 'handlebars/runtime';
+
 import joinSpace from './joinSpace';
 
-export default function(...classList) {
-  return `class="${ joinSpace(...classList) }"`;
-}
+module.exports.register = hbs => {
+  hbs.registerHelper('classAttrib', function(...classList) {
+    return new hbs.SafeString(`class="${ joinSpace(...classList) }"`);
+  })
+};
+

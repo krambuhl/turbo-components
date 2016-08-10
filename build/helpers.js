@@ -25,7 +25,7 @@ const {
 // Template Helpers
 const createHelperRequirement = file => {
   const name = getFileName(file);
-  return createRequirement(name, `helpers/${name}.js`) + '.default';
+  return createRequirement(name, `helpers/${name}.js`);
 };
 
 function compileHelpers(done) {

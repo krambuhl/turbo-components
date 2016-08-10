@@ -9,14 +9,12 @@
 // {{component attr=value}}
 // {{component data attr=value}}
 // {{#component data attr=value}}Why Hello{{/component}}
-// ```
-
-import Handlebars from 'handlebars/runtime';
+// ``
 
 // takes a template name
 // and returns a template function
-const getTemplateFn = name => {
-  const template = Handlebars.partials[name];
+const getTemplateFn = (hbs, name) => {
+  const template = hbs.partials[name];
 
   // throw an error if partial is missing
   if (template === null) {
@@ -26,27 +24,31 @@ const getTemplateFn = name => {
   return template;
 };
 
-export default function(name, locals, opts) {
-  if (arguments.length === 2) {
-    opts = locals;
-    locals = { };
-  }
+module.exports.register = hbs => {
+  hbs.registerHelper('component', function(name, locals, opts) {
+    if (arguments.length === 2) {
+      opts = locals;
+      locals = undefined;
+    }
 
-  // get the template
-  const template = getTemplateFn(name);
+    // get the template
+    const template = getTemplateFn(hbs, name);
 
-  // console.log(name, template)
-  
-  // // define data
-  // const cdata = Handlebars.Utils.extend({ }, this, locals, { attribs: opts.hash });
+    // get template result
+    let res = '';
+    if (typeof template === 'function') {
+      let data = { attribs: opts.hash };
+      if (opts.fn) {
+        data.children = opts.fn(this);
+      }
 
-  // // 
-  // const context = Handlebars.Utils.extend({ }, cdata, {
-  //   children: opts.fn(cdata)
-  // });
+      res = template(data);
+    } else {
+      console.log('Missing components: ' + name);
+    }
 
-  // get template result
-  const res = template({ });
+    // console.log(res)
 
-  return new Handlebars.SafeString(res);
+    return new hbs.SafeString(res);
+  });
 };

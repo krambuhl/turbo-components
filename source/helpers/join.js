@@ -11,10 +11,8 @@
 // atom/card/card__item
 // ```
 
-import Handlebars from 'handlebars/runtime';
-
-export default function(seperator) {
+module.exports = function(seperator) {
   return Array.prototype.slice.call(arguments, 1, -1)
     .filter(name => name)
     .join(seperator);
-}
+};

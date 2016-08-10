@@ -8,9 +8,6 @@
 // <div class="card card-lite card--big">Whoa Dude!</div>
 // ```
 
-import Handlebars from 'handlebars/runtime';
 import join from './join';
 
-export default function() {
-  return join(' ', ...arguments);
-}
+module.exports = (...args) => join(' ', ...args);

@@ -99,7 +99,7 @@ function compileTemplates(done) {
     .pipe(wrap('Handlebars.template(<%= contents %>)'))
     .pipe(defineModule('node'))
     .pipe(addTemplateRequirements())
-    .pipe(wrap('var Handlebars = require("../../lib/handlebars");<%= contents %>'))
+    .pipe(wrap('var Handlebars = require("../../lib/handlebars").default;<%= contents %>'))
     .pipe(prettify())
     .pipe(gulp.dest(paths.dest.root))
     .on('end', function() {

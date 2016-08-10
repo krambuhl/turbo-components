@@ -1,4 +1,14 @@
-var Handlebars = require("handlebars/runtime");
-Handlebars.registerHelper(require('../helpers.js'));
+import Handlebars from 'handlebars/runtime';
+import helpers from '../helpers';
 
-module.exports = Handlebars;
+Object.keys(helpers).forEach(name => {
+  const helper = helpers[name];
+  if (helper.register) {
+    helper.register(Handlebars);
+  } else {
+    Handlebars.registerHelper(name, helper);
+  }
+});
+
+
+export default Handlebars;

@@ -6,6 +6,4 @@
 // {{default undefinedVar "boogers"}}
 // ```
 
-export default function(...args) {
-  return args.find(arg => !!arg);
-}
+module.exports = (...args) => args.find(arg => !!arg);
