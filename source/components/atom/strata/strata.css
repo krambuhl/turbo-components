@@ -3,17 +3,17 @@
   --strata-banner: 1em;
 }
 
-@media (min-width: width(tiny)) {
+@media (min-width: width(medium)) {
   :root {
-    --strata-padding: 2em;
-    --strata-banner: 4em 2em;
+    --strata-padding: 4em;
+    --strata-banner: 12vw 2em;
   }  
 }
 
-@media (min-width: width(medium)) {
+@media (min-width: width(small)) {
   :root {
-    --strata-padding: 4em 2em;
-    --strata-banner: 12vw 2em;
+    --strata-padding: 2em;
+    --strata-banner: 4em 2em;
   }  
 }
 

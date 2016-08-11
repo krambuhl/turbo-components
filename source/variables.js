@@ -11,12 +11,12 @@ const color = name => colors[name];
 
 
 const widths = {
-  tiny: '480px',
-  small: '600px',
-  medium: '768px',
-  large: '1024px',
-  huge: '1280px',
-  giant: '1440px'
+  tiny: '32em',
+  small: '40em',
+  medium: '48em',
+  large: '54em',
+  huge: '60em',
+  giant: '72em'
 };
 
 const width = name => width[name];
