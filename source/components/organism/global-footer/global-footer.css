@@ -1,0 +1,6 @@
+.global-footer {
+  background-color: color(purple-dark);
+  color: color(light);
+
+  text-align: right;
+}

@@ -11,7 +11,7 @@ const getFileCategory = file => {
 const getFileNamespace = file => {
   const base = file.path.substr(file.base.length);
   const name = base.substr(1, base.lastIndexOf('/'));
-  return name.substr(name.indexOf('/')).split('/').join('');
+  return name.substr(name.indexOf('/')).split('/').filter(a => a).join('');
 };
 
 module.exports = {

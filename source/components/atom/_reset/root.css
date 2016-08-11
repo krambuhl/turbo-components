@@ -1,0 +1,15 @@
+html, body{
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background-color: color(light);
+  color: color(dark);
+}
+
+body {
+  font-family: menlo;
+  font-size: 130%;
+  line-height: 1.5em;
+}

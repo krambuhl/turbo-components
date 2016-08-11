@@ -1,6 +1,9 @@
 .heading {
-	font-weight: bold;
+  font-family: "lazer84";
+  font-weight: normal;
 	font-size: 1.5em;
+  letter-spacing: 1px;
+  line-height: 1.3em;
 }
 
 .heading--h1 { font-size: 2em; }

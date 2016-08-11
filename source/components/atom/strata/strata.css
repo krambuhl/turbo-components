@@ -1,0 +1,26 @@
+:root {
+  --strata-padding: 1em;
+  --strata-banner: 1em;
+}
+
+@media (min-width: width(tiny)) {
+  :root {
+    --strata-padding: 2em;
+    --strata-banner: 4em 2em;
+  }  
+}
+
+@media (min-width: width(medium)) {
+  :root {
+    --strata-padding: 4em 2em;
+    --strata-banner: 12vw 2em;
+  }  
+}
+
+.strata {
+  padding: var(--strata-padding);
+}
+
+.strata--banner {
+  padding: var(--strata-banner);
+}
