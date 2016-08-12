@@ -1,14 +1,15 @@
 .heading {
   font-family: "lazer84";
-  font-weight: normal;
-	font-size: 1.5em;
+  font-weight: 500;
+  font-size: 1.5em;
+  
   letter-spacing: 1px;
   line-height: 1.3em;
 }
 
-.heading--h1 { font-size: 2em; }
+.heading--h1 { font-size: 3em; }
 .heading--h2 { font-size: 1.8em; }
-.heading--h3 { font-size: 1.65em; }
-.heading--h4 { font-size: 1.5em; }
-.heading--h5 { font-size: 1.35em; }
-.heading--h6 { font-size: 1.2em; }
+.heading--h3 { font-size: 1.5em; }
+.heading--h4 { font-size: 1.35em; }
+.heading--h5 { font-size: 1.2em; }
+.heading--h6 { font-size: 1em; }

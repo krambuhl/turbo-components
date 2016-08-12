@@ -1,0 +1,7 @@
+{{#component "atom/card" addClass=(joinSpace "product" attribs.addClass) }}
+	{{#component "atom/card__contents"}}
+		{{#component "atom/blockquote" cite=attribs.cite}}
+			{{{children}}}
+		{{/component}}
+	{{/component}}
+{{/component}}

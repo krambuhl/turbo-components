@@ -25,7 +25,7 @@ const getTemplateFn = (hbs, name) => {
 };
 
 module.exports.register = hbs => {
-  hbs.registerHelper('component', function(name, locals, opts) {
+  function component(name, locals, opts) {
     if (arguments.length === 2) {
       opts = locals;
       locals = undefined;
@@ -50,5 +50,8 @@ module.exports.register = hbs => {
     // console.log(res)
 
     return new hbs.SafeString(res);
-  });
+  }
+  
+  hbs.registerHelper('component', component);
+  hbs.registerHelper('c', component);
 };

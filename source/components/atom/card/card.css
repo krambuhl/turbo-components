@@ -1,10 +1,13 @@
 .card {
-	background-color: white;
-	border: 1px solid black;
-	
-	padding: 20px;
+	background-color: color(light);
+	padding: 1em;
 }
 
-.card__header {
+.card__contents {
+	padding: 1em;
+}
 
+
+.card--nopadding {
+	padding: 0em;
 }

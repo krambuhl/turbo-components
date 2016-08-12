@@ -1,14 +1,23 @@
 .button {
 	display: inline-block;
-	padding: 5px;
+	padding: 0.5em 1em;
 
-	background: color(brand);
-	color: white;
+	background-color: color(purple-mid);
+	color: color(light);
+	text-decoration: none;
 
-	border: 1px solid red;
-	border-radius: 100%;
+	&:hover {
+		background-color: color(purple-mid--alt);
+	}
 }
 
 .button--cta {
-	background-color: red;
+	border: 2px solid color(purple-mid);
+	background-color: transparent;
+	color: color(purple-mid);
+
+	&:hover {
+		background-color: color(purple-mid);
+		color: color(light);
+	}
 }

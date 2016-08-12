@@ -1,40 +1,33 @@
 # turbo-components
 
-This is a testing repo for pulling versioned components using git and version tags.
+This is repo for pulling versioned components using git.  It defines how all the components in a design system should appear and behave, using handlebars, css, and js.
 
-# Components
+## Post Clone
 
-## Atoms 
+After pulling this repository down to your local machine, run `npm link` in the repo directory.  This will create a dependency symlink, so you can install your local repo as a dependency elsewhere using `npm link turbo-components`
 
-- `atom/button`
-- `atom/button--cta`
-- `atom/card`
-- `atom/card-list`
-- `atom/card-list--grid`
-- `atom/heading`
-- `atom/heading--h1`
-- `atom/heading--h2`
-- `atom/heading--h3`
-- `atom/heading--h4`
-- `atom/heading--h5`
-- `atom/heading--h6`
-- `atom/html`
-- `atom/html__head`
-- `atom/html__foot`
-- `atom/list`
-- `atom/list__item`
+## Commands
 
-## Molecules
+__Build__
 
-- `molecule/product`
+Clean `dist` directory, then Precompiles templates, transpiles ES6 to ES5, copies css, and creates indexes for module consumption.
 
-## Organisms
+```
+npm run build
+```
 
-- `organisms/product-list`
-- `organisms/product-list--grid`
+__Watch__
 
-## Templates
+Watches files and runs build commands when changes occur.
 
-- `template/search`
+```
+npm run watch
+```
 
+__Develop__
 
+If you're developing, you probably want to build, then watch for file changes. _How sweet._
+
+```
+npm run develop
+```

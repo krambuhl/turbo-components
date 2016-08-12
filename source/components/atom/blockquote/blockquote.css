@@ -1,0 +1,7 @@
+.blockquote {
+}
+
+.blockquote__cite {
+	display: block;
+	font-weight: bold;
+}

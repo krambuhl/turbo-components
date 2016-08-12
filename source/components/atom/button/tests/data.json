@@ -1,0 +1,7 @@
+{
+	"attribs": {
+		"href": "/cta.html",
+		"addClass": "aclass"
+	},
+	"children": "hello world"
+}

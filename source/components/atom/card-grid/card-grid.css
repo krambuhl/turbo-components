@@ -1,0 +1,72 @@
+.card-grid {
+	overflow: hidden;
+
+	.card {
+		width: 100%;
+	}
+
+	.card + .card {
+		margin-top: 2em;
+	}
+}
+
+@media (min-width: breakpoint(medium-large)) {
+	.card-grid--two {
+		.card {
+			float: left;
+		}
+
+		.card + .card {
+			margin-top: 0;
+		}
+
+		.card {
+			width: 48%;
+
+			&:nth-child(2n+1) {
+				margin-right: 4%;
+			}
+		}
+
+		.card {
+			&:nth-child(2n+1),
+			&:nth-child(2n+2) { margin-top: 4%; }
+
+			&:nth-child(1),
+			&:nth-child(2) {
+				margin-top: 0;
+			}
+		}
+	}
+}
+
+@media (min-width: breakpoint(medium-large)) {
+	.card-grid--three {
+		.card {
+			float: left;
+		}
+
+		.card + .card {
+			margin-top: 0;
+		}
+
+		.card {
+			width: 30%;
+
+			&:nth-child(3n+1),
+			&:nth-child(3n+2) {
+				margin-right: 5%;
+			}
+
+			&:nth-child(3n+1),
+			&:nth-child(3n+2),
+			&:nth-child(3n+3) { margin-top: 4%; }
+
+			&:nth-child(1),
+			&:nth-child(2),
+			&:nth-child(3) {
+				margin-top: 0;
+			}
+		}
+	}
+}

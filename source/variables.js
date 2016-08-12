@@ -1,27 +1,34 @@
 const colors = {
   'teal': '#4edb75',
+  'teal-light': '#8eff94',
   'purple-dark': '#280c22',
-  'purple-mid': '#dad5d7',
-  'purple-light': '#8c4482',
+  'purple-mid': '#8c4482',
+  'purple-mid--alt': '#703668',
+  'purple-light': '#dad5d7',
   'light': '#fff',
+  'offlight': '#eee',
+  'medium': '#aaa',
+  'offdark': '#666',
   'dark': '#222'
 };
 
 const color = name => colors[name];
 
 
-const widths = {
-  tiny: '32em',
-  small: '40em',
-  medium: '48em',
-  large: '54em',
-  huge: '60em',
-  giant: '72em'
+const breakpoints = {
+  tiny: '24rem',
+  small: '32rem',
+  'medium-small': '40rem',
+  'medium-large': '52rem',
+  large: '60rem',
+  huge: '72rem',
+  giant: '96rem'
 };
 
-const width = name => width[name];
+const breakpoint = name => breakpoints[name];
+
 
 module.exports = {
-  color: name => colors[name],
-  width: name => widths[name]
+  color,
+  breakpoint
 };

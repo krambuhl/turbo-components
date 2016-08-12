@@ -1,19 +1,11 @@
 :root {
-  --strata-padding: 1em;
-  --strata-banner: 1em;
+  --strata-padding: 6vw;
+  --strata-banner: 6vw;
 }
 
-@media (min-width: width(medium)) {
+@media (min-width: breakpoint(medium-large)) {
   :root {
-    --strata-padding: 4em;
-    --strata-banner: 12vw 2em;
-  }  
-}
-
-@media (min-width: width(small)) {
-  :root {
-    --strata-padding: 2em;
-    --strata-banner: 4em 2em;
+    --strata-banner: 12vw 2vw;
   }  
 }
 

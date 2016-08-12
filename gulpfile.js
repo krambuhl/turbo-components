@@ -19,6 +19,8 @@ const styles = require('./build/styles');
 const lib = require('./build/lib');
 
 
+gulp.task('clean', clean);
+
 gulp.task('build', gulp.series(
   clean,
   gulp.parallel(

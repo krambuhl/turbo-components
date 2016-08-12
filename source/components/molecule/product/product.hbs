@@ -1,15 +1,11 @@
-{{#component "atom/card" addClass=(joinSpace "product rhythm" attribs.addClass)}}
-	{{#component "atom/heading--h2"}}
-		{{{attribs.title}}}
+{{#component "atom/card" addClass=(joinSpace "product" attribs.addClass) }}
+	{{#component "atom/card__contents"}}
+	    {{#component "atom/heading--h3"}}{{attribs.title}}{{/component}}
+	    <div class="product__label">includes:</div>
+	    {{{children}}}
 	{{/component}}
-	{{#if attribs.features}}
-		{{#component "atom/list" type="unordered"}}
-			{{#each attribs.features}}
-				{{#component "atom/list__item"}}{{.}}{{/component}}
-			{{/each}}
-		{{/component}}
+	
+	{{#if attribs.href}}
+		{{#component "atom/button" href=attribs.href}}{{attribs.cost}} / month{{/component}}
 	{{/if}}
-	{{#component "atom/button" href=attribs.url}}
-		Learn More
-	{{/component}}
 {{/component}}

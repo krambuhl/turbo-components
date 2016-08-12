@@ -1,9 +1,0 @@
-{{#component "atom/card-list" addClass=(joinSpace "product-list" attribs.addClass)}}
-  {{#each attribs.products as |product|}}
-		{{component "molecule/product"
-        addClass="product-list__item"
-				title=product.title
-				url=product.url
-				feature=product.details}}
-	{{/each}}
-{{/component}}

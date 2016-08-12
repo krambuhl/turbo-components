@@ -1,11 +1,11 @@
 {
   "name": "turbo-components",
-  "description": "This is a repo for pulling versioned components using git",
+  "description": "This is a repo for pulling components using git",
   "scripts": {
+    "clean": "gulp clean",
     "build": "gulp build",
     "watch": "gulp watch",
-    "precommit": "npm run build",
-    "test": "node ./tests/test.js"
+    "develop": "npm run build && npm run watch"
   },
   "main": "dist/index.js",
   "style": "dist/index.css",

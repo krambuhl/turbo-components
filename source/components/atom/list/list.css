@@ -1,5 +1,6 @@
 .list {
   list-style: none;
+	list-style-position: inside;
 }
 
 .list__item {
@@ -7,9 +8,13 @@
 }
 
 .list--ordered { 
-	list-style: decimal inside;
+	list-style-type: decimal;
 }
 
 .list--unordered { 
-  list-style: disc inside;
+  list-style-type: disc;
+}
+
+.list--outside {
+	list-style-position: outside;
 }

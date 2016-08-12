@@ -1,5 +1,19 @@
 .product {
-	.button {
-		background-color: green;
+	.heading {
+		word-spacing: 100em;
+		
+	    &:first-line {
+	    	font-size: 1.6em;
+	    	line-height: 1em;
+	    }
 	}
+
+	.button {
+		width: 100%;
+	}
+}
+
+.product__label {
+	color: color(medium);
+	font-size: 75%;
 }
