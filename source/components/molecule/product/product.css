@@ -1,6 +1,7 @@
 .product {
 	.heading {
 		word-spacing: 100em;
+		margin-bottom: 0.75em;
 		
 	    &:first-line {
 	    	font-size: 1.6em;
@@ -9,6 +10,7 @@
 	}
 
 	.button {
+		margin-top: 10px;
 		width: 100%;
 	}
 }
