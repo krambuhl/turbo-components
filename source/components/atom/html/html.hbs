@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
-{{component "atom/html__head" pageTitle=attribs.pageTitle}}
-<body>
+{{component "atom/html__head" pageTitle=pageTitle}}
+<body{{#if bodyClass}} {{classAttrib bodyClass}}{{/if}}>
 
 {{{children}}}
 

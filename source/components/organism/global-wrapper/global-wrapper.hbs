@@ -1,4 +1,6 @@
-{{#component "atom/html" pageTitle=attribs.pageTitle addClass=attribs.addClass}}
-  {{{children}}}
+{{#component "atom/html" pageTitle=pageTitle bodyClass="global-wrapper"}}
+  <div class="global-wrapper__content">
+    {{{children}}}
+  </div>
   {{component "organism/global-footer"}}
 {{/component}}

@@ -21,3 +21,12 @@
 		color: color(light);
 	}
 }
+
+.button--ondark {
+  background-color: color(light);
+  color: color(dark);
+
+  &:hover {
+    background-color: color(offlight);
+  }
+}

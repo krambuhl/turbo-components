@@ -37,7 +37,7 @@ module.exports.register = hbs => {
     // get template result
     let res = '';
     if (typeof template === 'function') {
-      let data = { attribs: opts.hash };
+      let data = hbs.Utils.extend({}, opts.hash);
       if (opts.fn) {
         data.children = opts.fn(this);
       }

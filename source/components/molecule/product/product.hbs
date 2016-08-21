@@ -1,11 +1,11 @@
-{{#component "atom/card" addClass=(joinSpace "product" attribs.addClass) }}
+{{#component "atom/card" addClass=(joinSpace "product" addClass) }}
 	{{#component "atom/card__contents"}}
-	    {{#component "atom/heading--h3"}}{{attribs.title}}{{/component}}
+	    {{#component "atom/heading--h3"}}{{title}}{{/component}}
 	    <div class="product__label">includes:</div>
 	    {{{children}}}
 	{{/component}}
 	
-	{{#if attribs.href}}
-		{{#component "atom/button" href=attribs.href}}{{attribs.cost}} / month{{/component}}
+	{{#if href}}
+		{{#component "atom/button" addClass=buttonClass href=href}}{{cost}} / month{{/component}}
 	{{/if}}
 {{/component}}

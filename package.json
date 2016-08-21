@@ -21,7 +21,6 @@
     "gulp-util": "^3.0.7",
     "gulp-wrap": "^0.13.0",
     "handlebars": "^4.0.5",
-    "handlebars-wax": "^4.0.0",
     "lodash": "^4.14.1",
     "merge-stream": "^1.0.0",
     "rimraf": "^2.5.4",

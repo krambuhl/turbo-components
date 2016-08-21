@@ -1,0 +1,9 @@
+.global-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.global-wrapper__content {
+  flex: 1;
+}

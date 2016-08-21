@@ -19,3 +19,12 @@
 	color: color(medium);
 	font-size: 75%;
 }
+
+.product--highlight {
+  background-color: color(purple-mid);
+  color: color(light);
+
+  .product__label {
+    color: color(purple-dark);
+  }
+}
